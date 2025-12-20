@@ -14,7 +14,7 @@ function EditExpense() {
     // fetch rh existing expense
     useEffect(() => {
         const fetchExpense = async () => {
-            const res = await fetch(`http://127.0.0.1:5000/my-expenses/${id}`, {
+            const res = await fetch(`https://expense-backend-gviv.onrender.com/my-expenses/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -35,7 +35,7 @@ function EditExpense() {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
-        const res = await fetch(`http://127.0.0.1:5000/my-expenses/${id}`, {
+        const res = await fetch(`https://expense-backend-gviv.onrender.com/my-expenses/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

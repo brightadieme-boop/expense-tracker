@@ -14,7 +14,7 @@ function MyExpenses() {
   // Fetch all expenses
   const getExpenses = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/my-expenses", {
+      const res = await fetch("https://expense-backend-gviv.onrender.com/my-expenses", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,7 @@ function MyExpenses() {
     if (!confirmed) return;
 
     try {
-      const res = await fetch(`http://127.0.0.1:5000/my-expenses/${id}`, {
+      const res = await fetch(`https://expense-backend-gviv.onrender.com/my-expenses/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

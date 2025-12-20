@@ -21,7 +21,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:5000/my-expenses", {
+                const res = await fetch("https://expense-backend-gviv.onrender.com/my-expenses", {
                     headers: {
                         "Content-Type": "application/json", 
                         "Authorization": `Bearer ${token}`
