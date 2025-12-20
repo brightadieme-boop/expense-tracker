@@ -1,8 +1,12 @@
+import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-#PostgreSQL connection URL
-DATABASE_URL = "postgresql://bright_user:mypassword@localhost/expense_tracker"
+#PostgreSQL connection URL deployment
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://bright_user:mypassword@localhost/expense_tracker")
+
+DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Create sqlalchemy Engine
 engine = create_engine(DATABASE_URL, echo=True)
