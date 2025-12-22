@@ -66,3 +66,26 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Fix unclickable buttons by bringing them to the front */
+nav,
+ .navbar,
+  button,
+  a, 
+  .form-container,
+  input {
+    position: relative !important;
+    z-index: 100 !important;
+  } 
+
+
+/*Push the background particles to the back */
+
+#tsparticles, .particles-container {
+  z-index: -1 !important;
+  position: absolute !important;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
