@@ -18,7 +18,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const response = await fetch("https://expense-backend-gviv.onrender.com/login", {
+            const response = await fetch("https://expense-backend-gviv.onrender.com/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
