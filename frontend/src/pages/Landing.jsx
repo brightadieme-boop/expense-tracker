@@ -23,7 +23,7 @@ export default function Landing() {
                 </p>
                 <button
                   className="landing-btn"
-                  onClick={() => (window.location.href = "/login")}
+                  onClick={() => (window.location.href = "/register")}
                 >
                     Get Started <ArrowRight size={18} />
                 </button>
