@@ -37,8 +37,8 @@ function Navbar() {
                <Link to="/login">Login</Link>
               </li>
 
-              <li className={location.pathname === "/Register" ? "active" : ""}>
-                <Link to="/Register">Register</Link>
+              <li className={location.pathname === "/register" ? "active" : ""}>
+                <Link to="/register">Register</Link>
               </li>
 
               </>
