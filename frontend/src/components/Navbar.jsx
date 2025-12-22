@@ -44,7 +44,7 @@ function Navbar() {
               </>
               )}
 
-              {/* If user is logged  in ,  show "hi, name" and Logout*/}
+              {/* If user is logged ,  show "hi, name" and Logout*/}
               {user && (
                 <>
                   <li>Hello! {user.full_name} , how's life?</li>
