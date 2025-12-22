@@ -62,7 +62,7 @@ function Login() {
     return (
 
      <>
-       <ParticlesBackground />
+      { /* <ParticlesBackground /> */}
         <div className="login-page">
             <h1>Register or Login</h1>
 
