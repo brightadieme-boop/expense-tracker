@@ -55,3 +55,15 @@
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+#root {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+#tsparticles,
+canvas, .particles-container {
+  position: absolute !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
