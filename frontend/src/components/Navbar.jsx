@@ -1,56 +1,121 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/main.css"; 
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // Check if the user has a "Key" (token) in their pocket
-  const isAuthenticated = localStorage.getItem("token");
+  
+  // 1. Get the Token
+  const token = localStorage.getItem("token");
+  
+  // 2. Get the User Object (Safely!)
+  // We have to JSON.parse it because it was saved as a string text
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  
+  // 3. Fallback name just in case the database didn't send one
+  const userName = user?.full_name || "Friend";
 
   const handleLogout = () => {
-    // Throw away the key and go to Login
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   return (
-    <nav className="navbar" style={{ zIndex: 9999, position: "relative" }}>
-      <div className="logo">
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          Money Tracker
-        </Link>
-      </div>
-      
-      <ul className="nav-links" style={{ display: "flex", gap: "20px", listStyle: "none", alignItems: "center" }}>
-        
-        {isAuthenticated ? (
-          /* SHOW THESE IF LOGGED IN */
+    <nav style={styles.nav}>
+      <h1 
+        style={styles.logo} 
+        onClick={() => navigate(token ? "/dashboard" : "/login")}
+      >
+        MoniTrackr 💸
+      </h1>
+
+      <div style={styles.links}>
+        {token ? (
+          /* --- LOGGED IN --- */
           <>
-            <li><Link to="/dashboard" style={{ color: "white", textDecoration: "none" }}>Dashboard</Link></li>
-            <li><Link to="/my-expenses" style={{ color: "white", textDecoration: "none" }}>My Expenses</Link></li>
-            <li><Link to="/expenses" style={{ color: "white", textDecoration: "none" }}>Add Expense</Link></li>
-            <li>
-              <button onClick={handleLogout} style={{ cursor: "pointer", background: "red", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px" }}>
-                Logout
-              </button>
-            </li>
+            {/* The Friendly Greeting */}
+            <span style={styles.greeting}>
+              Hello, <span style={styles.nameHighlight}>{user.full_name}</span>! 👋, how's life?
+            </span>
+
+            <Link to="/dashboard" style={styles.link}>Dashboard</Link>
+            <Link to="/my-expenses" style={styles.link}>My Expenses</Link>
+            <button onClick={handleLogout} style={styles.logoutBtn}>
+              Logout
+            </button>
           </>
         ) : (
-          /* SHOW THESE IF LOGGED OUT */
+          /* --- LOGGED OUT --- */
           <>
-            <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li>
-            <li>
-               <Link to="/register">
-                 <button style={{ cursor: "pointer", padding: "8px 15px" }}>Register</button>
-               </Link>
-            </li>
+            <Link to="/login" style={styles.link}>Login</Link>
+            <Link to="/register" style={styles.registerBtn}>Register</Link>
           </>
         )}
-      </ul>
+      </div>
     </nav>
   );
 };
 
-export default Navbar;
+// --- STYLES ---
+const styles = {
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "1rem 2rem",
+    backgroundColor: "#1f2937",
+    color: "white",
+    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+    position: "relative",
+    zIndex: 9999,
+  },
+  logo: {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    cursor: "pointer",
+    margin: 0,
+    color: "#34d399",
+  },
+  links: {
+    display: "flex",
+    gap: "20px",
+    alignItems: "center",
+  },
+  greeting: {
+    color: "#9ca3af", // Soft gray so it doesn't distract too much
+    fontSize: "0.95rem",
+    marginRight: "10px", // Push it a bit away from the buttons
+    fontWeight: "500",
+  },
+  nameHighlight: {
+    color: "#fff", // Make the name bright white
+    fontWeight: "bold",
+  },
+  link: {
+    color: "#e5e7eb",
+    textDecoration: "none",
+    fontSize: "1rem",
+    fontWeight: "600",
+    cursor: "pointer",
+  },
+  logoutBtn: {
+    backgroundColor: "#ef4444",
+    color: "white",
+    border: "none",
+    padding: "8px 16px",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+  registerBtn: {
+    backgroundColor: "#34d399",
+    color: "#1f2937",
+    textDecoration: "none",
+    padding: "8px 16px",
+    borderRadius: "5px",
+    fontWeight: "bold",
+  }
+};
 
+export default Navbar;
