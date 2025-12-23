@@ -7,6 +7,13 @@ from schemas import UserCreate, UserResponse, UserLogin, ExpenseCreate
 from utils import hash_password, verify_password
 from auth import create_access_token
 from deps import get_current_user
+from fastapi import Request
+from fastapi.responses import Response
+
+@app.options("/{path:path}")
+def preflight_handler(path: str, request: Request):
+    return Response(status_code=200)
+
 
 app = FastAPI()
 
@@ -15,13 +22,14 @@ origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://my-moneytracker-phi.vercel.app",
-    "https://monitrackr.com"
+    "https://monitrackr.com",
+    "https://www.monitrackr.com"
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
