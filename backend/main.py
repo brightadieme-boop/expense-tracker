@@ -10,9 +10,6 @@ from deps import get_current_user
 from fastapi import Request
 from fastapi.responses import Response
 
-@app.options("/{path:path}")
-def preflight_handler(path: str, request: Request):
-    return Response(status_code=200)
 
 
 app = FastAPI()
@@ -28,7 +25,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins_regrex=r"https://.*\.vercel\.app",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -198,6 +195,11 @@ def update_expense(
         "message": "Your expense just updated!",
         "expense": expense
     }
+
+
+@app.options("/{path:path}")
+def preflight_handler(path: str, request: Request):
+    return Response(status_code=200)
 
 
 
