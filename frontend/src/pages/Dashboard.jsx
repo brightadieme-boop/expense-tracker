@@ -75,7 +75,7 @@ export default function Dashboard() {
 
     return (
         <div style={{ padding: "20px" }}>
-            <h1>Welcome to your Dashboard, {user.full_name}!</h1>
+            <h1>Hi {user.full_name}, Welcome to your Dashboard</h1>
 
             <MonthPicker
                 selectedMonth={selectedMonth}
@@ -85,7 +85,8 @@ export default function Dashboard() {
             <div style={{
                 display: "flex",
                 gap: "20px",
-                margin: "20px 0"
+                margin: "20px 0",
+                flexWrap: "wrap"
             }}>
                 <div style={{
                     flex: 1,
@@ -156,7 +157,7 @@ export default function Dashboard() {
             </div>
 
             <div className="dashboard-section">
-                <h2>Spending Breakdown</h2>
+                <h2>Here's Your Spending Breakdown</h2>
 
                 <div 
                  className="chart-wrapper"
