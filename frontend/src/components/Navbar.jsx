@@ -1,70 +1,32 @@
-import {UseEffect, useState } from "react";
 import React from "react";
-import {Link} from "react-router-dom";
-import "./Navbar.css"; //stylrsheet we will create
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../styles/main.css"; // Ensure styles are applied
 
-const user = JSON.parse(localStorage.getItem("user"));
-
-function Navbar() {
-  const location = useLocation();
-
-  if (location.pathname === "/") return null;
-    return (
-        <nav className="navbar">
-            <div className="logo">Expense Tracker</div>
-
-             
-            <ul className="nav-links">
-
-                {/* Always visible */}
-                <li className={location.pathname === "/dashboard" ? "active" : ""}>
-                 <Link to="/dashboard">Dashboard</Link>
-                </li>
-
-                <Link to="/my-expenses" style={{ marginLeft: "20px" }}>My Expenses</Link>
-
-                <li className={location.pathname === "/expenses" ? "active" : ""}>
-
-                 <Link to="/expenses">Add Expense</Link>
-                </li>
-                 {/* If NO user is logged in , show Login/Register */}
-
-                {!user && ( 
-              <>
-
-              <li className={location.pathname === "/login" ? "active" : ""}>
-               <Link to="/login">Login</Link>
-              </li>
-
-              <li className={location.pathname === "/register" ? "active" : ""}>
-                <Link to="/register">Register</Link>
-              </li>
-
-              </>
-              )}
-
-              {/* If user is logged ,  show "hi, name" and Logout*/}
-              {user && (
-                <>
-                  <li>Hello! {user.full_name} , how's life?</li>
-                  <li>
-                    <button
-                     onClick={() => {
-                      localStorage.removeItem("user");
-                      window.location.href = "/login";
-                     }}
-                    > 
-                      Logout
-                    </button>
-                  </li>
-                </>
-              )}
-                
-            
-            </ul>
-        </nav>
-    );
-}
+const Navbar = () => {
+  return (
+    <nav className="navbar" style={{ zIndex: 9999, position: "relative" }}>
+      <div className="logo">
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          Money Tracker
+        </Link>
+      </div>
+      
+      <ul className="nav-links" style={{ display: "flex", gap: "20px", listStyle: "none" }}>
+        <li>
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>Home</Link>
+        </li>
+        <li>
+          <Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link>
+        </li>
+        <li>
+           {/* This button is purely for navigation test */}
+          <Link to="/register">
+             <button style={{ cursor: "pointer", padding: "5px 10px" }}>Register</button>
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;
