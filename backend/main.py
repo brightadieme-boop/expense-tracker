@@ -25,12 +25,23 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins_regrex=r"https://.*\.vercel\.app",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
+@app.options("/login")
+@app.options("register")
+def preflight_auth():
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "https://monitrackr.com",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Aceess-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+    )
 
 
 #Create database tables
@@ -195,11 +206,6 @@ def update_expense(
         "message": "Your expense just updated!",
         "expense": expense
     }
-
-
-@app.options("/{path:path}")
-def preflight_handler(path: str, request: Request):
-    return Response(status_code=200)
 
 
 

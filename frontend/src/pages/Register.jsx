@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
     const [full_name, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,29 +31,19 @@ export default function Register() {
 
             const result = await response.json();
 
-    
+            if (!response.ok) {
+                alert("Registration failed: " + result.detail);
+                return;
+            }
 
-      console.log("Success!", response.data);
-      alert("Account created successfully! Please log in.");
-      navigate("/login");
+            alert("Registration successful!");
+            window.location.href = "/login";
 
-    } catch (err) {
-      console.error("Full Error Object:", err);
-      
-      // Better Error Handling
-      if (err.response) {
-        // The server answered, but with an error code (400, 500, etc.)
-        setError(err.response.data.detail || "Server rejected the request.");
-      } else if (err.request) {
-        // The request was sent but no answer received (Network/CORS error)
-        setError("Network Error: Server didn't respond. (Check CORS or Server Status)");
-      } else {
-        setError("Error setting up request.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+        } catch (error) {
+            alert("Error connecting to server");
+            console.error(error);
+        }
+    };
 
     return (
         <div style={{ padding: "20px" }}>
@@ -99,4 +86,4 @@ export default function Register() {
             </form>
         </div>
     );
-};
+}
