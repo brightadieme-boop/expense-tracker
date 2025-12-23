@@ -36,10 +36,11 @@ const Navbar = () => {
           <>
             {/* The Friendly Greeting */}
             <span style={styles.greeting}>
-              Hello, <span style={styles.nameHighlight}>{user.full_name}</span>! 👋, how's life?
+              Hello, <span style={styles.nameHighlight}>{user.full_name}</span> ! 👋, how's life?
             </span>
 
             <Link to="/dashboard" style={styles.link}>Dashboard</Link>
+            <Link to="/expenses" style={styles.addBtn}>Add Expense</Link>
             <Link to="/my-expenses" style={styles.link}>My Expenses</Link>
             <button onClick={handleLogout} style={styles.logoutBtn}>
               Logout
@@ -99,8 +100,19 @@ const styles = {
     fontWeight: "600",
     cursor: "pointer",
   },
+  addBtn: {
+    backgroundColor: "#3b82f6",
+    color: "white",
+    padding: "8px 16px",
+    borderRadius: "20px", // Makes it rounded(pill shape)
+    textDecoration: "none",
+    fontWeight: "bold", 
+    fontSize: "0.9rem",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+    marginLeft: "10px", //adds a little breathing room
+  },
   logoutBtn: {
-    backgroundColor: "#ef4444",
+    backgroundColor: "#7e6d11ff",
     color: "white",
     border: "none",
     padding: "8px 16px",
