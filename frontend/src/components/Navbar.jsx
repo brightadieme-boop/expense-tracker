@@ -38,7 +38,7 @@ const Navbar = () => {
               </span>
 
               <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-              <Link to="/my-expenses" style={styles.link}>My Expenses</Link>
+              <Link to="/my-expenses" style={styles.link}>View Expenses</Link>
               
               {/* Add Button */}
               <Link to="/expenses" style={styles.addBtn}>
@@ -112,7 +112,7 @@ const styles = {
   
   // Pill Button
   addBtn: {
-    backgroundColor: "#071e59ff", 
+    backgroundColor: "#12a065ff", 
     color: "white", padding: "8px 16px", borderRadius: "20px",
     textDecoration: "none", fontWeight: "bold", fontSize: "0.9rem",
     boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
@@ -120,7 +120,7 @@ const styles = {
   },
   
   logoutBtn: { backgroundColor: "#51520aff", color: "white", border: "none", padding: "8px 16px", borderRadius: "5px", cursor: "pointer", fontWeight: "bold" },
-  registerBtn: { backgroundColor: "#096846ff", color: "#1f2937", textDecoration: "none", padding: "8px 16px", borderRadius: "5px", fontWeight: "bold" }
+  registerBtn: { backgroundColor: "#0dd99fff", color: "#1f2937", textDecoration: "none", padding: "8px 16px", borderRadius: "5px", fontWeight: "bold" }
 };
 
 export default Navbar;
